@@ -1,4 +1,4 @@
-# CSV Translation Packer
+# CSV Translation Packer (.NET 8.0)
 
 I've just used a pretty nice translation service, but it is extracts results as a `.zip` file with several translations as `.csv` files.  
 My target translation should look like one combined `.csv` file with a bunch of different columns.  
