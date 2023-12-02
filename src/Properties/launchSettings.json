@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "CsvTranslationPacker": {
-      "commandName": "Project",
-      "commandLineArgs": "CurseBound-03-12-2023-1701554536603.zip"
-    }
-  }
-}
