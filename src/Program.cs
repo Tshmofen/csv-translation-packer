@@ -52,3 +52,6 @@ finally
 {
     Console.ForegroundColor = initialColor;
 }
+
+Console.Write("Press any key to continue...");
+Console.ReadKey();
