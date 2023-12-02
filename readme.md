@@ -1,6 +1,6 @@
 # CSV Translation Packer (.NET 8.0)
 
-I've just used a pretty nice translation service, but it is extracts results as a `.zip` file with several translations as `.csv` files.  
+I've just used a pretty nice translation service, but it is exports results as a `.zip` file with several translations as `.csv` files.
 My target translation should look like one combined `.csv` file with a bunch of different columns.  
 Transforming them manually everytime would be an incredibly tedious chore, so, that's where this little app comes in handy.
 
@@ -8,7 +8,7 @@ Transforming them manually everytime would be an incredibly tedious chore, so, t
 
 1. Read `.zip` file path from first command line argument.
 2. Extract languages from file names like `*.[lang].csv`.
-3. Extract each file and parse content. Here's the input tables (be aware of empty column):
+3. Extract each file and parse content. Here's the input tables (empty column!):
 <div align="center">
   
 |[KEY]||[VALUE]|
@@ -26,7 +26,7 @@ Transforming them manually everytime would be an incredibly tedious chore, so, t
 
 </div>
 
-5. Save this file in the same directory, where command was queiried.
+5. Save this file in the directory, where app was executed from.
 
 ## Notes
 Pretty sure nobody will be viewing this repo, but if you do, feel free to do whatever you want with this code, no licenses whatsoever.  
