@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace CsvTranslationPacker;
+namespace CsvTranslationPacker.Validation;
 
 public static partial class Validator
 {

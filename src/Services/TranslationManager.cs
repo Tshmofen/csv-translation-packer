@@ -3,8 +3,9 @@ using System.Globalization;
 using System.Text;
 using CsvHelper;
 using CsvHelper.Configuration;
+using CsvTranslationPacker.Models;
 
-namespace CsvTranslationPacker;
+namespace CsvTranslationPacker.Services;
 
 public static class TranslationManager
 {
@@ -40,15 +41,16 @@ public static class TranslationManager
         return output;
     }
 
-    public static void WriteTranslationsInOneFile(List<Translation> translations, string filePath, string delimiter = ",")
+    public static void WriteTranslationsInOneFile(List<Translation> translations)
     {
+        var settings = SettingsManager.Settings;
         var languages = GetTranslationsLanguages(translations);
         var keys = GetTranslationsKeys(translations);
 
         using var table = new DataTable();
 
-        table.Columns.Add("key");
-        foreach(var language in languages)
+        table.Columns.Add(settings.KeyColumnName);
+        foreach (var language in languages)
         {
             table.Columns.Add(language);
         }
@@ -59,20 +61,22 @@ public static class TranslationManager
         }
 
         table.AcceptChanges();
-        CsvWriter.SaveDataTableAsCsv(table, filePath, delimiter);
+        CsvWriter.SaveDataTableAsCsv(table, settings.OutputFile, settings.Delimiter);
     }
 
-    public static IList<Translation> ParseTranslations(byte[] csvContent, string delimiter = ",")
+    public static IList<Translation> ParseTranslations(byte[] csvContent)
     {
+        var settings = SettingsManager.Settings;
         var config = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
-            HasHeaderRecord = false,
-            Delimiter = delimiter
+            HasHeaderRecord = settings.InputHasHeaders,
+            Delimiter = settings.Delimiter
         };
 
         using var fileReader = new StringReader(Encoding.UTF8.GetString(csvContent));
         using var csvParser = new CsvReader(fileReader, config);
 
+        csvParser.Context.RegisterClassMap(new TranslationMap(settings.KeyColumnIndex, settings.ValueColumnIndex));
         return csvParser.GetRecords<Translation>().ToList();
     }
 

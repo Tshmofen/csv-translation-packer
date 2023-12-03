@@ -1,6 +1,6 @@
 ﻿using Ionic.Zip;
 
-namespace CsvTranslationPacker;
+namespace CsvTranslationPacker.Services;
 
 public static class ZipReader
 {
@@ -17,5 +17,11 @@ public static class ZipReader
         }
 
         return extractedFiles;
-    } 
+    }
+
+    public static string GetZipFile(string inputPath)
+    {
+        return Directory.GetFiles("./", inputPath).FirstOrDefault() 
+            ?? throw new IOException($"No file found by search '{inputPath}'");
+    }
 }
