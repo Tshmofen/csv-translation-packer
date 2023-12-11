@@ -61,7 +61,7 @@ public static class TranslationManager
         }
 
         table.AcceptChanges();
-        CsvWriter.SaveDataTableAsCsv(table, settings.OutputFile, settings.Delimiter);
+        CsvWriteHelper.SaveDataTableAsCsv(table, settings.OutputFile, settings.Delimiter);
     }
 
     public static IList<Translation> ParseTranslations(byte[] csvContent)
